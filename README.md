@@ -24,39 +24,32 @@ python3 -m http.server 8080
 
 Other options:
 - VS Code "Live Server" extension
-- `npx serve .` (if you have Node)
+- Any other static file server
 
 **Important:** Double-clicking `index.html` directly (`file://`) often has issues with image loading. Use one of the methods above.
 
 ## Files
 
-This is a true plain project:
+This is a true plain static project:
 
 - `index.html` — the page
 - `styles.css` — all styles
-- `app.js` — all the visualization logic (no modules)
+- `app.js` — all the visualization logic (plain JavaScript, no modules)
 - `images/` — the 4 sample photos
-- `three.min.js` — only present if you want a fully offline copy (currently the app loads Three.js from CDN)
 
 ## How to customize
 
-Just edit `app.js` and `styles.css` with any text editor. No build step.
+Just edit `app.js` and `styles.css` with any text editor. There is no build step.
 
-## Optional: fully offline single-file version
+## Fully offline / single-file version
 
-If you need one `index.html` that works with double-click / email / USB (everything inlined):
+If you need one self-contained `index.html` (for email, USB, or `file://` use), you can manually create one by:
 
-```bash
-npm install          # only needed once
-npm run build:single
-```
+1. Inlining the contents of `styles.css` into a `<style>` tag
+2. Inlining `app.js` into a `<script>` tag
+3. Embedding the images as base64
 
-Then use `dist/index.single.html`.
-
-## Original modular source
-
-The `src/` folder + `vite.config.js` + `package.json` are the old modular (Vite) version.  
-They are kept only for reference. The active plain version lives in the root files.
+Or use an external tool to bundle it.
 
 ## License
 

@@ -4,7 +4,8 @@ An interactive 3D visualization of a convolutional neural network classifying ca
 
 Built with **Three.js** + vanilla JavaScript. The visualization shows the forward pass through the network layers with animated particles, pulsing feature maps, and a live inference panel.
 
-![CNN Visualizer screenshot](https://via.placeholder.com/800x420?text=CNN+Visualizer+Screenshot)
+<img width="1914" height="979" alt="image" src="https://github.com/user-attachments/assets/2bd59124-0db7-4ea5-92aa-6c46d195907f" />
+
 
 ## Features
 

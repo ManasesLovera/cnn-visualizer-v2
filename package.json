@@ -1,0 +1,21 @@
+{
+  "name": "cnn-visualizer",
+  "version": "1.0.0",
+  "description": "Interactive 3D visualization of a Convolutional Neural Network for cat vs dog classification",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build:single": "npm run build && node scripts/build-single.js"
+  },
+  "dependencies": {
+    "three": "^0.175.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  },
+  "keywords": ["cnn", "visualization", "three.js", "neural-network", "machine-learning", "education"],
+  "author": "",
+  "license": "MIT"
+}

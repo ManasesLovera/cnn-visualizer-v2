@@ -1,4 +1,3 @@
-import './styles.css';
 import * as THREE from 'three';
 import { createScene } from './scene/core.js';
 import {

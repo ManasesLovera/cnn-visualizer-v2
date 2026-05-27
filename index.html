@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CNN Visualizer · Cat vs Dog</title>
   <meta name="description" content="Interactive 3D visualization of a convolutional neural network classifying cat vs dog images.">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <canvas id="three"></canvas>
@@ -89,6 +90,10 @@
     </div>
   </aside>
 
-  <script type="module" src="/src/main.js"></script>
+  <!-- Three.js (classic global build) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+  <!-- Our application (plain classic JS, no modules, no npm) -->
+  <script src="app.js"></script>
 </body>
 </html>

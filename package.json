@@ -1,7 +1,7 @@
 {
   "name": "cnn-visualizer",
   "version": "1.0.0",
-  "description": "Interactive 3D visualization of a Convolutional Neural Network for cat vs dog classification",
+  "description": "Plain HTML+CSS+JS version of the CNN Visualizer (no build step needed). The Vite tooling below is optional/legacy.",
   "type": "module",
   "scripts": {
     "dev": "vite",

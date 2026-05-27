@@ -32,12 +32,12 @@ export const LAYER_LABELS = [
   { id: 'output',  txt: 'Output',    sub: 'softmax',  x: POS.output,  y: 1.7 },
 ];
 
-// Image metadata (paths resolved relative to public at runtime)
+// Image metadata (paths are relative for static / GitHub Pages hosting)
 export const IMAGES = [
-  { kind: 'cat', label: 'Cat · 01', file: '/images/cat1.jpg' },
-  { kind: 'cat', label: 'Cat · 02', file: '/images/cat2.jpg' },
-  { kind: 'dog', label: 'Dog · 01', file: '/images/dog1.jpg' },
-  { kind: 'dog', label: 'Dog · 02', file: '/images/dog2.jpg' },
+  { kind: 'cat', label: 'Cat · 01', file: 'images/cat1.jpg' },
+  { kind: 'cat', label: 'Cat · 02', file: 'images/cat2.jpg' },
+  { kind: 'dog', label: 'Dog · 01', file: 'images/dog1.jpg' },
+  { kind: 'dog', label: 'Dog · 02', file: 'images/dog2.jpg' },
 ];
 
 export const PARTICLE_COUNT = 160;

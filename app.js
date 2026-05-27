@@ -93,7 +93,9 @@ function createSimpleControls(camera, domElement) {
 
     if (state.rotate) {
       theta -= dx * 0.0035;
-      phi = Math.max(0.2, Math.min(Math.PI - 0.2, phi + dy * 0.0035));
+      // Invert dy so vertical mouse movement feels natural
+      // (dragging up orbits the camera upward)
+      phi = Math.max(0.2, Math.min(Math.PI - 0.2, phi - dy * 0.0035));
     }
     if (state.pan) {
       const panSpeed = radius * 0.0018;

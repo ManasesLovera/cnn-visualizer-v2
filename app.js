@@ -494,7 +494,7 @@ function createLayerLabels(camera) {
 
 function createVecOverlay(camera) {
   const el = document.getElementById('vec-overlay');
-  if (!el) return { update: () => {}, show: () => {}, hide: () => {} };
+  if (!el) return { update: () => {}, show: () => {}, hide: () => {}, render: () => {} };
 
   const tmpV = new THREE.Vector3();
   function project(x, y, z) {
@@ -510,10 +510,31 @@ function createVecOverlay(camera) {
     el.style.left = `${p.x}px`;
     el.style.top = `${p.y}px`;
   }
-  function show() { el.classList.add('show'); }
-  function hide() { el.classList.remove('show'); }
 
-  return { update, show, hide };
+  function render(samples = []) {
+    if (!samples.length) {
+      el.innerHTML = '<div class="vhead">Flatten vector</div>';
+      return;
+    }
+    el.innerHTML = `
+      <div class="vhead">Flatten activations (sample)</div>
+      ${samples.map(s => `
+        <div class="v">
+          <span class="idx">${s.idx}</span>
+          <span class="num">${s.value.toFixed(2)}</span>
+          <div class="bar" style="--w: ${Math.max(3, s.value * 100)}%"></div>
+        </div>
+      `).join('')}
+    `;
+  }
+
+  function show() { el.classList.add('show'); }
+  function hide() {
+    el.classList.remove('show');
+    el.innerHTML = '';
+  }
+
+  return { update, show, hide, render };
 }
 
 // ===== SIMULATION =====
@@ -926,7 +947,22 @@ function initUI({ onImageSelect, onClassify, onAccuracyChange }) {
         }
       );
       updateParticles(particles, PATH_X, dt);
-      if (simulation.pulses.flatten > 0.1) vecOverlay.show();
+
+      if (simulation.pulses.flatten > 0.1) {
+        vecOverlay.show();
+
+        // Live sample of the flatten vector (simulated activations)
+        const pulse = simulation.pulses.flatten;
+        const samples = Array.from({ length: 9 }, (_, i) => {
+          const baseIdx = i * 255 + Math.floor((t * 2.5) % 60);
+          const idx = Math.min(2303, Math.max(0, baseIdx));
+          // Values "stream" and react to the pulse intensity
+          const v = 0.15 + Math.sin(t * 3.8 + i * 1.7) * 0.35 * pulse + (Math.sin(t * 7 + i) * 0.1 * pulse);
+          const value = Math.max(0.02, Math.min(0.98, v));
+          return { idx, value };
+        });
+        vecOverlay.render(samples);
+      }
     } else {
       hideParticles(particles);
       vecOverlay.hide();

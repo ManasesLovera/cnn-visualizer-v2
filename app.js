@@ -48,11 +48,16 @@ const PARTICLE_COUNT = 160;
 
 // ===== SIMPLE ORBIT CONTROLS (plain JS, no external dependency) =====
 function createSimpleControls(camera, domElement) {
+  // Sensitivity constants (lower = slower / more precise movement)
+  const ROTATE_SPEED = 0.002;
+  const PAN_SPEED_FACTOR = 0.0012;
+  const ZOOM_SPEED = 0.009;
+
   const state = {
     rotate: false,
     pan: false,
     autoRotate: true,
-    autoRotateSpeed: 0.3,
+    autoRotateSpeed: 0.2, // slightly slower auto-rotation too
     enableDamping: true,
     dampingFactor: 0.07,
     minDistance: 6,
@@ -92,14 +97,14 @@ function createSimpleControls(camera, domElement) {
     lastY = e.clientY;
 
     if (state.rotate) {
-      theta -= dx * 0.0035;
+      theta -= dx * ROTATE_SPEED;
       // dy is positive when mouse moves down on screen.
       // We add dy so that dragging the mouse up (negative dy) decreases phi,
       // which moves the camera upward (orbits toward the top of the scene).
-      phi = Math.max(0.2, Math.min(Math.PI - 0.2, phi + dy * 0.0035));
+      phi = Math.max(0.2, Math.min(Math.PI - 0.2, phi + dy * ROTATE_SPEED));
     }
     if (state.pan) {
-      const panSpeed = radius * 0.0018;
+      const panSpeed = radius * PAN_SPEED_FACTOR;
       const right = new THREE.Vector3();
       const up = new THREE.Vector3(0, 1, 0);
       right.crossVectors(camera.position, up).normalize();
@@ -111,7 +116,7 @@ function createSimpleControls(camera, domElement) {
 
   function onWheel(e) {
     e.preventDefault();
-    radius = Math.max(state.minDistance, Math.min(state.maxDistance, radius + e.deltaY * 0.015));
+    radius = Math.max(state.minDistance, Math.min(state.maxDistance, radius + e.deltaY * ZOOM_SPEED));
     updateSpherical();
     state.autoRotate = false;
   }
